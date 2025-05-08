@@ -1,0 +1,20 @@
+name: Coding Agent - Create PR from issue
+run-name: ${{ github.actor }} is creating a pull request from an issue description
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to create a PR from'
+        required: true
+        type: number
+jobs:
+  create-pr:
+    name: Generate pull request
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Creating pull request from issue #${{ github.event.inputs.issue_number }}"
+  
