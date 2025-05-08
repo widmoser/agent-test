@@ -8,5 +8,11 @@ jobs:
     name: Generate updated code
     if: contains(github.event.pull_request.labels.*.name, 'coding-agent')
     runs-on: ubuntu-latest
+    steps:
+      - name: Address PR review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Addressing PR review for pull request #${{ github.event.pull_request.number }}"
 
   
