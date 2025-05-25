@@ -12,9 +12,20 @@ jobs:
     name: Generate pull request
     runs-on: ubuntu-latest
     steps:
-      - name: Create pull request
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Create branch
+        run: gh branch create issue-${{ inputs.issue_number }} --checkout
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "Creating pull request from issue #${{ github.event.inputs.issue_number }}"
+      - name: Generate code from issue description
+        uses: widmoser/agent@c2245b7e57aabc3fc1ad8461522c2244fc5d94fd
+        with:
+          repository: ${{ github.repository }}
+          branch: issue-${{ inputs.issue_number }}
+          object_number: ${{ inputs.issue_number }}
+          action: create
+          model: openai/gpt-4o
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          openrouter_api_key: ${{ secrets.OPENROUTER_API_KEY }}
   
