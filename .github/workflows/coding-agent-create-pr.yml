@@ -18,6 +18,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Create branch
         run: git checkout -b issue-${{ inputs.issue_number }}
+      - name: Pull changes
+        run: git pull origin issue-${{ inputs.issue_number }}
       - name: Upload branch
         run: git push --set-upstream origin issue-${{ inputs.issue_number }}
       - name: Generate code from issue description
