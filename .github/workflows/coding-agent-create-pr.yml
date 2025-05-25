@@ -16,8 +16,12 @@ jobs:
         uses: actions/checkout@v4
       - name: Create branch
         run: git checkout -b issue-${{ inputs.issue_number }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload branch
         run: git push origin issue-${{ inputs.issue_number }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Generate code from issue description
         uses: widmoser/agent@c2245b7e57aabc3fc1ad8461522c2244fc5d94fd
         with:
