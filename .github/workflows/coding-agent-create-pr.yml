@@ -19,7 +19,7 @@ jobs:
       - name: Create branch
         run: git checkout -b issue-${{ inputs.issue_number }}
       - name: Upload branch
-        run: git push
+        run: git push --set-upstream origin issue-${{ inputs.issue_number }}
       - name: Generate code from issue description
         uses: widmoser/agent@c2245b7e57aabc3fc1ad8461522c2244fc5d94fd
         with:
