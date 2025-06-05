@@ -25,7 +25,7 @@ jobs:
       - name: Upload branch
         run: git push --set-upstream origin issue-${{ inputs.issue_number }}
       - name: Generate code from issue description
-        uses: widmoser/agent-action@main
+        uses: widmoser/agent@main
         with:
           repository: ${{ github.repository }}
           branch: issue-${{ inputs.issue_number }}
