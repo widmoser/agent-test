@@ -10,8 +10,7 @@ on:
 jobs:
   create-pr:
     name: Generate pull request
-    permissions:
-      contents: write
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
