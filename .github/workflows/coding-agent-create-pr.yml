@@ -25,7 +25,7 @@ jobs:
       - name: Upload branch
         run: git push --set-upstream origin issue-${{ inputs.issue_number }}
       - name: Create pull request
-        run: gh pr create --title "Issue #${{ inputs.issue_number }}" --body "This PR is created from issue #${{ inputs.issue_number }} description." --base main --head issue-${{ inputs.issue_number }}
+        run: gh pr create --title "Test PR" --body "Test content" --base main --head issue-${{ inputs.issue_number }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: Generate code from issue description
