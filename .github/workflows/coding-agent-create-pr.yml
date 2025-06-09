@@ -24,14 +24,18 @@ jobs:
         run: git pull origin issue-${{ inputs.issue_number }}
       - name: Upload branch
         run: git push --set-upstream origin issue-${{ inputs.issue_number }}
-      - name: Generate code from issue description
-        uses: widmoser/agent@main
-        with:
-          repository: ${{ github.repository }}
-          branch: issue-${{ inputs.issue_number }}
-          object_number: ${{ inputs.issue_number }}
-          action: create
-          model: openai/gpt-4o
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          openrouter_api_key: ${{ secrets.OPENROUTER_API_KEY }}
+      - name: Create pull request
+        run: gh pr create --title "Issue #${{ inputs.issue_number }}" --body "This PR is created from issue #${{ inputs.issue_number }} description." --base main --head issue-${{ inputs.issue_number }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Generate code from issue description
+      #   uses: widmoser/agent@main
+      #   with:
+      #     repository: ${{ github.repository }}
+      #     branch: issue-${{ inputs.issue_number }}
+      #     object_number: ${{ inputs.issue_number }}
+      #     action: create
+      #     model: openai/gpt-4o
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     openrouter_api_key: ${{ secrets.OPENROUTER_API_KEY }}
   
